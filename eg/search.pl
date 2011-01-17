@@ -32,15 +32,15 @@ for my $res_group ( @{ $res->ResponseGroup } ) {
     my $apps_response = $res_group->appsResponse;
     for my $app ( @{ $apps_response->app } ) {
         warn Dumper $app;
-#        my $res = $api->comments( $app->id );
-#        for my $comments_res_group ( @{ $res->ResponseGroup } ) {
-#            my $comments_res = $comments_res_group->commentsResponse;
-#            if ( ref $comments_res->comments eq 'ARRAY' ) {
-#                for my $comment ( @{ $comments_res->comments } ) {
-#                    warn Dumper $comment;
-#                }
-#            }
-#        }
+        my $res = $api->comments( { appId => $app->id } );
+        for my $comments_res_group ( @{ $res->ResponseGroup } ) {
+            my $comments_res = $comments_res_group->commentsResponse;
+            if ( ref $comments_res->comments eq 'ARRAY' ) {
+                for my $comment ( @{ $comments_res->comments } ) {
+                    warn Dumper $comment;
+                }
+            }
+        }
     }
 }
 

@@ -113,15 +113,11 @@ sub search {
 }
 
 sub comments {
-    my ( $self, $appId, $startIndex, $entriesCount ) = @_;
-    $startIndex ||= 0;
-    $entriesCount ||= 5;
+    my ( $self, $args ) = @_;
+    $args->{ startIndex } ||= 0;
+    $args->{ entriesCount } ||= 5;
 
-    my $cr = CommentsRequest->new;
-    $cr->appId( $appId );
-    $cr->startIndex( $startIndex );
-    $cr->entriesCount( $entriesCount );
-
+    my $cr = CommentsRequest->new( $args );
     my $req_group = Request::RequestGroup->new;
     $req_group->commentsRequest( [ $cr ] );
 
